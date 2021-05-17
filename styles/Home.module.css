@@ -119,3 +119,24 @@
     flex-direction: column;
   }
 }
+.signin_box {
+  background: #ffffff;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 50px;
+  text-align: center;
+}
+.signin_tiles {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 5px;
+}
+.signin_tile {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.signin_tile span {
+  margin: 10px 0;
+}
