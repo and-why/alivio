@@ -1,13 +1,15 @@
-import Image from 'next/image';
-import styles from '../styles/Footer.module.css';
+import { Box, Flex } from '@chakra-ui/layout';
+import { Image } from '@chakra-ui/react';
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
-      <span className={styles.logo_footer}>
+    <Flex p='2' direction='flex-row' align='center' justify='center'>
+      <Box pr='2'>
         <Image src='/images/Logo.svg' alt='Vercel Logo' width={77} height={29} />
-      </span>
-      <span>relief for your brain </span>
-    </footer>
+      </Box>
+      <Box>
+        <span>relief for your brain </span>
+      </Box>
+    </Flex>
   );
 }
