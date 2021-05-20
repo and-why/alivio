@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import { Text } from '@chakra-ui/layout';
 import Image from 'next/image';
-import { useAuth } from '../lib/auth';
+import { useAuth } from '@/lib/auth';
 
 export default function Signintile(props) {
   const auth = useAuth();

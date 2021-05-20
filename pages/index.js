@@ -2,9 +2,9 @@ import Head from 'next/head';
 import { Button } from '@chakra-ui/button';
 import { Flex, Link } from '@chakra-ui/layout';
 
-import { useAuth } from '../lib/auth';
-import Footer from '../components/footer';
-import Signinbox from '../components/signinbox';
+import { useAuth } from '@/lib/auth';
+import Footer from '@/components/Footer';
+import Signinbox from '@/components/signinbox';
 
 export default function Home() {
   const auth = useAuth();

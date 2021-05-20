@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
+import useSWR from 'swr';
 
 import { Accordion } from '@chakra-ui/accordion';
 import { Flex, Heading, Link } from '@chakra-ui/layout';
 
 import ProjectAccordion from './ProjectAccordion';
 import FormNewProject from './FormNewProject';
-import { useAuth } from '../lib/auth';
-import { getProjectData } from '../lib/db';
+import { useAuth } from '@/lib/auth';
+import fetcher from '@/utils/fetcher';
+import ProjectsAccordionSkeleton from './ProjectsAccordionSkeleton';
 
 export default function Sidebar() {
   const auth = useAuth();
   const uid = auth.user.uid;
   const [formOpen, setFormOpen] = useState(false);
-  const [data, setData] = useState();
+  const { data, error } = useSWR('/api/projects', fetcher);
 
-  console.log(data);
   function handleProjectInput() {
     setFormOpen(true);
   }
@@ -27,20 +28,13 @@ export default function Sidebar() {
     }
   };
 
-  useEffect(() => {
-    setData(getProjectData);
-  }, [getProjectData]);
-
   return (
     <Flex height='100%' p={4} minWidth='300px'>
       <Flex flexDirection='column' width='100%' onKeyDown={escFunction}>
         <Heading as='h2' size='md'>
           Projects
         </Heading>
-        <Accordion defaultIndex={[0]} allowMultiple width='100%'>
-          <ProjectAccordion projectName={'Project 2'} />
-        </Accordion>
-
+        {!data ? <ProjectsAccordionSkeleton /> : <ProjectAccordion projects={data.projects} />}
         {formOpen ? (
           <FormNewProject handleOpenState={handleOpenState} />
         ) : (

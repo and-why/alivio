@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Link } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
-import DashboardShell from '../components/DashboardShell';
-import { useAuth } from '../lib/auth';
+import DashboardShell from '@/components/DashboardShell';
+import { useAuth } from '@/lib/auth';
 
 export default function DashboardPage() {
   const auth = useAuth();

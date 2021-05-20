@@ -1,7 +1,7 @@
 import { Avatar } from '@chakra-ui/avatar';
 import { Button } from '@chakra-ui/button';
 import { Flex, Heading, Link, Text } from '@chakra-ui/layout';
-import { useAuth } from '../lib/auth';
+import { useAuth } from '@/lib/auth';
 
 const Navbar = () => {
   const auth = useAuth();
