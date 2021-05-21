@@ -5,18 +5,19 @@ import { Accordion } from '@chakra-ui/accordion';
 import { Flex, Heading, Link } from '@chakra-ui/layout';
 
 import ProjectAccordion from './ProjectAccordion';
-import FormNewProject from './FormNewProject';
+
 import { useAuth } from '@/lib/auth';
 import fetcher from '@/utils/fetcher';
 import ProjectsAccordionSkeleton from './ProjectsAccordionSkeleton';
+import FormNewProject from './forms/FormNewProject';
 
 export default function Sidebar() {
   const auth = useAuth();
   const uid = auth.user.uid;
   const [formOpen, setFormOpen] = useState(false);
-  const { data, error } = useSWR('/api/projects', fetcher);
+  const { data, error } = useSWR(`/api/projects/${uid}`, fetcher);
 
-  function handleProjectInput() {
+  function handleInput() {
     setFormOpen(true);
   }
   function handleOpenState() {
@@ -38,8 +39,15 @@ export default function Sidebar() {
         {formOpen ? (
           <FormNewProject handleOpenState={handleOpenState} />
         ) : (
-          <Link size='md' p={2} mt={10} justifyContent='flex-start' onClick={handleProjectInput}>
-            New Project...
+          <Link
+            color='gray.500'
+            size='md'
+            p={2}
+            mt={10}
+            justifyContent='flex-start'
+            onClick={handleInput}
+          >
+            Create New Project...
           </Link>
         )}
       </Flex>
