@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import NextLink from 'next/link';
 import { Box, Heading, Link } from '@chakra-ui/layout';
 
 import FormNewTask from '@/components/forms/FormNewTask';
@@ -22,9 +22,14 @@ export default function TaskItemList({ tasks, projectId }) {
       {tasks.map((task) => {
         if (task.projectId === projectId) {
           return (
-            <Box key={task.taskId} mb={4}>
-              {task.taskName}
-            </Box>
+            <NextLink
+              key={task.taskId}
+              mb={4}
+              href='/projects/tasks/[sideId]'
+              as={`/projects/tasks/${task.taskId}`}
+            >
+              <Link>{task.taskName}</Link>
+            </NextLink>
           );
         }
       })}
