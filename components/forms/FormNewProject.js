@@ -19,7 +19,7 @@ export default function FormNewProject(props) {
       projectId: hash,
       uid,
       projectName: data.projectName,
-      dateCreated: new Date().getTime(),
+      dateCreated: new Date().toISOString(),
     };
     createNewProject(newProject);
     toast({
@@ -30,7 +30,7 @@ export default function FormNewProject(props) {
       isClosable: true,
     });
     mutate(
-      `/api/projects/${uid}`,
+      `/api/projects`,
       async (data) => {
         return { projects: [...data.projects, newProject] };
       },

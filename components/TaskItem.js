@@ -3,20 +3,22 @@ import Icon from '@chakra-ui/icon';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import { Tag } from '@chakra-ui/tag';
 import { CheckIcon } from '@chakra-ui/icons';
+import { format } from 'date-fns';
 
-export default function TaskItem({ name, dueDate }) {
+export default function TaskItem({ task }) {
+  const { dateCreated, dateDue, isCompleted, taskName } = task;
   const today = new Date();
-  const due = new Date(dueDate);
+  const due = new Date(dateDue);
   const difference = -Math.round((today.getTime() - due.getTime()) / (1000 * 3600 * 24));
 
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [isComplete, setIsCompleted] = useState(isCompleted);
 
   const handleIsCompleted = () => {
-    return setIsCompleted(!isCompleted);
+    return setIsCompleted(!isComplete);
   };
   return (
     <Flex justifyContent='flex-start' alignItems='center' mb={2}>
-      {isCompleted ? (
+      {isComplete ? (
         <CheckIcon
           onClick={handleIsCompleted}
           mr={4}
@@ -40,9 +42,9 @@ export default function TaskItem({ name, dueDate }) {
         ></Box>
       )}
       <Text fontSize='md' mr={10}>
-        {name}
+        {taskName}
       </Text>
-      {dueDate && today.toLocaleDateString() < due.toLocaleDateString() && (
+      {dateDue && today.toLocaleDateString() < due.toLocaleDateString() && (
         <Tag colorScheme='whatsapp' mr={2} minHeight='1rem' fontSize='10px'>
           DUE IN {difference} DAY{difference > 1 && 'S'}
         </Tag>
@@ -57,9 +59,9 @@ export default function TaskItem({ name, dueDate }) {
           DUE TODAY
         </Tag>
       )}
-      {dueDate && (
+      {dateDue && (
         <Tag colorScheme='whatsapp' mr={2} minHeight='1rem' fontSize='10px'>
-          {dueDate}
+          {format(new Date(dateDue), 'PPP')}
         </Tag>
       )}
     </Flex>
