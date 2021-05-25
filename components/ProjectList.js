@@ -7,7 +7,6 @@ import { useAuth } from '@/lib/auth';
 
 export default function ProjectList({ projects }) {
   const auth = useAuth();
-  const uid = auth.user.uid;
   const [formOpen, setFormOpen] = useState(false);
 
   function handleOpenState() {
@@ -19,7 +18,7 @@ export default function ProjectList({ projects }) {
     }
   };
   return (
-    <Flex direction='column'>
+    <Flex direction='column' w='100%'>
       {projects.map((project) => {
         return (
           <NextLink
@@ -28,7 +27,9 @@ export default function ProjectList({ projects }) {
             as={`/projects/${project.projectId}`}
             passHref
           >
-            <Link m={2}>{project.projectName}</Link>
+            <Link ml={2} mb={2}>
+              {project.projectName}
+            </Link>
           </NextLink>
         );
       })}

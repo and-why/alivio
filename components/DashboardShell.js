@@ -18,7 +18,7 @@ const DashboardShell = ({ children }) => {
       justifyContent='space-between'
       alignItems='center'
       height='100vh'
-      minWidth='1000px'
+      minWidth='600px'
       p={2}
     >
       <Navbar />

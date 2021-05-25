@@ -6,9 +6,9 @@ import theme from '../styles/theme';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
+import '@/styles/datepicker.css';
 
 import { css, Global } from '@emotion/react';
-
 const GlobalStyle = ({ children }) => {
   const { colorMode } = useColorMode();
 

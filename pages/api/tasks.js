@@ -1,9 +1,15 @@
-import { getAllTasks } from '@/lib/admin-db';
+import { getUserTasks } from '@/lib/admin-db';
+import { auth } from '@/lib/firebase-admin';
 
 const tasksData = async (req, res) => {
-  const tasks = await getAllTasks();
+  try {
+    const { uid } = await auth.verifyIdToken(req.headers.token);
+    const tasks = await getUserTasks(uid);
 
-  res.status(200).json({ tasks });
+    res.status(200).json(tasks);
+  } catch (error) {
+    res.status(200).json(error);
+  }
 };
 
 export default tasksData;

@@ -15,6 +15,15 @@ export default function Home() {
         <title>alivio</title>
         <meta name='description' content='Giving your mind some relief' />
         <link rel='icon' href='/favicon.ico' />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+          if (document.cookie && document.cookie.includes('bare-comments-auth')) {
+            window.location.href = "/dashboard"
+          }
+        `,
+          }}
+        />
       </Head>
 
       <Flex padding='5' align='center' justify='center'>

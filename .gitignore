@@ -34,5 +34,4 @@ yarn-error.log*
 .vercel
 
 # firebase-admin
-lib/alivio-5722c-firebase-adminsdk-8bpqi-eff8708589.json
-lib/alivio-5722c-firebase-adminsdk-8bpqi-14c34be647.json
+/alivio-5722c-firebase-adminsdk-8bpqi-eff8708589.json

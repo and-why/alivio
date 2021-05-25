@@ -12,7 +12,8 @@ import FormNewProject from './forms/FormNewProject';
 
 export default function Sidebar() {
   const [formOpen, setFormOpen] = useState(false);
-  const { data, error } = useSWR(`/api/projects`, fetcher);
+  const { user } = useAuth();
+  const { data } = useSWR(user ? [`/api/projects`, user.token] : null, fetcher);
 
   function handleInput() {
     setFormOpen(true);
@@ -27,24 +28,17 @@ export default function Sidebar() {
   };
 
   return (
-    <Flex height='100%' p={4} minWidth='300px'>
+    <Flex height='100%' p={4} minWidth='220px' maxWidth='300px' w='100%'>
       <Flex flexDirection='column' width='100%' onKeyDown={escFunction}>
-        <Heading as='h2' size='md'>
+        <Heading as='h2' size='md' mb={2}>
           Projects
         </Heading>
         {!data ? <ProjectsSkeleton /> : <ProjectList projects={data.projects} />}
         {formOpen ? (
           <FormNewProject handleOpenState={handleOpenState} />
         ) : (
-          <Link
-            color='gray.500'
-            size='md'
-            p={2}
-            mt={10}
-            justifyContent='flex-start'
-            onClick={handleInput}
-          >
-            Create New Project...
+          <Link color='gray.500' size='md' p={2} justifyContent='flex-start' onClick={handleInput}>
+            + Create Project...
           </Link>
         )}
       </Flex>

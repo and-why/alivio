@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { mutate } from 'swr';
+
 import { Input } from '@chakra-ui/input';
 import { Button, Flex, useToast } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
+
 import { useAuth } from '@/lib/auth';
 import { createNewProject } from '@/lib/db';
-import { mutate } from 'swr';
 import { randomHash } from '@/utils/random-hash';
 
 export default function FormNewProject(props) {
-  const auth = useAuth();
-  const uid = auth.user.uid;
+  const { user } = useAuth();
+  const uid = user.uid;
   const toast = useToast();
 
   const { register, handleSubmit, reset, setFocus } = useForm();
@@ -30,28 +32,27 @@ export default function FormNewProject(props) {
       isClosable: true,
     });
     mutate(
-      `/api/projects`,
+      ['/api/projects', user.token],
       async (data) => {
         return { projects: [...data.projects, newProject] };
       },
       false,
     );
     props.handleOpenState();
-
     reset();
   };
+
   const handleClose = (e) => {
     e.preventDefault();
     props.handleOpenState();
   };
-
   useEffect(() => {
     setFocus('projectName');
   }, [setFocus]);
 
   return (
     <form onSubmit={handleSubmit(createProject)}>
-      <Input mt={10} mb={2} {...register('projectName')} placeholder='Project Name' />
+      <Input mt={8} mb={2} {...register('projectName')} placeholder='Project Name' />
       <Flex>
         <Button onClick={handleClose} w='45%' mr={2}>
           Cancel

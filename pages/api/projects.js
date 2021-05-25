@@ -1,9 +1,16 @@
-import { getAllProjects } from '@/lib/admin-db';
+import { auth } from '@/lib/firebase-admin';
+import { getUserProjects } from '@/lib/admin-db';
 
 const projectsData = async (req, res) => {
-  const projects = await getAllProjects();
+  try {
+    console.log(req);
+    const { uid } = await auth.verifyIdToken(req.headers.token);
+    const projects = await getUserProjects(uid);
 
-  res.status(200).json({ projects });
+    res.status(200).json(projects);
+  } catch (error) {
+    res.status(200).json(error);
+  }
 };
 
 export default projectsData;
