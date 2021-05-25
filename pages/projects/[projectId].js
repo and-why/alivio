@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import useSWR from 'swr';
+import { DragDropContext } from 'react-beautiful-dnd';
+import { Flex, Heading, Link, Spinner } from '@chakra-ui/react';
+
 import DashboardShell from '@/components/DashboardShell';
 import FormNewTask from '@/components/forms/FormNewTask';
 import TaskItem from '@/components/TaskItem';
 import { getAllProjects, getAllTasks } from '@/lib/admin-db';
 import { useAuth } from '@/lib/auth';
 import fetcher from '@/utils/fetcher';
-import { Flex, Heading, Link, Spinner } from '@chakra-ui/react';
 import TasksSkeleton from '@/components/TasksSkeleton';
 
 export default function ProjectPage({ projectId, projectName }) {
@@ -44,7 +46,6 @@ export default function ProjectPage({ projectId, projectName }) {
           <TasksSkeleton />
         ) : (
           <Flex direction='column'>
-            //this is the top level
             {data.tasks.map((task) => {
               if (projectId == task.projectId) {
                 return <TaskItem key={task.id} task={task} />;
@@ -71,11 +72,9 @@ export default function ProjectPage({ projectId, projectName }) {
 
 export async function getStaticProps(context) {
   const projectId = context.params.projectId;
-  console.log(context);
   const tasks = await getAllTasks();
   const { projects } = await getAllProjects();
   const project = projects.find((project) => project.projectId == projectId);
-  console.log(projects);
   return {
     props: {
       tasks: tasks,
@@ -86,7 +85,6 @@ export async function getStaticProps(context) {
 }
 export async function getStaticPaths() {
   const { projects } = await getAllProjects();
-  console.log(projects);
   const paths = projects.map((project) => ({
     params: {
       projectId: project.projectId.toString(),
