@@ -3,7 +3,6 @@ import { getUserProjects } from '@/lib/admin-db';
 
 const projectsData = async (req, res) => {
   try {
-    console.log(req);
     const { uid } = await auth.verifyIdToken(req.headers.token);
     const projects = await getUserProjects(uid);
 

@@ -16,3 +16,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.react-datepicker__input-container input {
+  height: 26px;
+}

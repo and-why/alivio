@@ -81,6 +81,7 @@ export async function getStaticProps(context) {
       projectId,
       projectName: project.projectName,
     },
+    revalidate: 1,
   };
 }
 export async function getStaticPaths() {

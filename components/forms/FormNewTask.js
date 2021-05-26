@@ -9,6 +9,7 @@ import { Button, Flex, useToast } from '@chakra-ui/react';
 import { useAuth } from '@/lib/auth';
 import { createNewTask } from '@/lib/db';
 import { randomHash } from '@/utils/random-hash';
+import fetcher from '@/utils/fetcher';
 
 import 'react-datepicker/dist/react-datepicker.css';
 

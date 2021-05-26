@@ -7,7 +7,7 @@ import { Input } from '@chakra-ui/input';
 import { Button, Flex, useToast } from '@chakra-ui/react';
 
 import { useAuth } from '@/lib/auth';
-import { createNewTask } from '@/lib/db';
+import { createNewSection } from '@/lib/db';
 import { randomHash } from '@/utils/random-hash';
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -21,14 +21,14 @@ export default function FormNewSection(props) {
   const { register, handleSubmit, reset, setFocus, control } = useForm();
   const createTask = (formData) => {
     const hash = randomHash(20);
-    const newTask = {
+    const newSection = {
       sectionId: hash,
       uid,
       projectId,
       sectionName: formData.taskName,
       class: 'section',
     };
-    createNewTask(newTask);
+    createNewSection(newSection);
     toast({
       title: 'New Section Added.',
       description: 'New Section Created',
@@ -40,7 +40,7 @@ export default function FormNewSection(props) {
     mutate(
       ['/api/tasks', user.token],
       async (data) => {
-        return { tasks: [...data.tasks, newTask] };
+        return { section: [...data.tasks, newTask] };
       },
       false,
     );
