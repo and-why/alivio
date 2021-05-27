@@ -20,7 +20,6 @@ export default function TaskTopLine({ task, handleOpenTaskDetails, taskIsOpen })
   return (
     <Flex
       _hover={{ cursor: 'pointer' }}
-      backgroundColor={taskIsOpen && 'gray'}
       justify='space-between'
       w='100%'
       alignItems='center'

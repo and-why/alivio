@@ -3,8 +3,7 @@ import { Button } from '@chakra-ui/button';
 import { Flex, Link } from '@chakra-ui/layout';
 import NextLink from 'next/link';
 import { useAuth } from '@/lib/auth';
-import Footer from '@/components/Footer';
-import Signinbox from '@/components/Signinbox';
+import Signinbox from '@/components/signinbox';
 
 export default function Home() {
   const auth = useAuth();
@@ -42,7 +41,6 @@ export default function Home() {
           <Signinbox />
         )}
       </Flex>
-      <Footer />
     </Flex>
   );
 }
