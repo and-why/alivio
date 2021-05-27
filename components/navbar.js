@@ -7,7 +7,14 @@ const Navbar = () => {
   const auth = useAuth();
 
   return (
-    <Flex justifyContent='space-between' width='100%' alignItems='center'>
+    <Flex
+      justifyContent='space-between'
+      width='100%'
+      alignItems='center'
+      borderBottom='1px solid'
+      pb={4}
+      borderBottomColor='gray.100'
+    >
       <Flex>
         <Link mr={2}>To Do</Link>
         <Text>|</Text>

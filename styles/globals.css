@@ -19,4 +19,15 @@ a {
 
 .react-datepicker__input-container input {
   height: 26px;
+  width: 120px;
+  background-color: transparent;
+}
+input,
+input:focus,
+input:active {
+  border-color: #edf2f7;
+  box-shadow: none !important;
+  outline: 0px !important;
+  border: 0px !important;
+  padding: 0 !important;
 }

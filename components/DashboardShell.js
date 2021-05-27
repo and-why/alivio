@@ -20,10 +20,10 @@ const DashboardShell = ({ children }) => {
       alignItems='center'
       height='100vh'
       minWidth='600px'
-      p={2}
+      p={4}
     >
       <Navbar />
-      <Flex justifyContent='center' alignItems='center' height='100%' width='100%'>
+      <Flex justifyContent='center' alignItems='center' height='100%' width='100%' py={4}>
         <Sidebar />
         <Flex width='100%' height='100%' p={4}>
           {children}
