@@ -10,7 +10,7 @@ import {
 import Navbar from './navbar';
 import TaskItem from './TaskItem';
 import Sidebar from './Sidebar';
-import Footer from './Footer';
+import Footer from './footer';
 
 const DashboardShell = ({ children }) => {
   return (
