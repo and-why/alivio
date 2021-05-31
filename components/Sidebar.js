@@ -28,7 +28,14 @@ export default function Sidebar() {
   };
 
   return (
-    <Flex height='100%' p={4} minWidth='220px' maxWidth='300px' w='100%'>
+    <Flex
+      height='100%'
+      p={4}
+      maxWidth='200px'
+      w='100%'
+      borderRight='1px solid'
+      borderRightColor='gray.100'
+    >
       <Flex flexDirection='column' width='100%' onKeyDown={escFunction}>
         <Heading as='h2' size='md' mb={2}>
           Workspaces

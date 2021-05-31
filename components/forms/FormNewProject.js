@@ -52,7 +52,7 @@ export default function FormNewProject(props) {
 
   return (
     <form onSubmit={handleSubmit(createProject)}>
-      <Input mt={8} mb={2} {...register('projectName')} placeholder='Project Name' />
+      <Input mb={2} {...register('projectName')} placeholder='Project Name' />
       <Flex>
         <Button onClick={handleClose} w='45%' mr={2}>
           Cancel

@@ -62,16 +62,28 @@ export default function FormNewTask(props) {
 
   return (
     <form onSubmit={handleSubmit(createTask)}>
-      <Input mt={8} mb={2} {...register('taskName')} placeholder='Task Name' />
+      <Input mb={2} {...register('taskName')} placeholder='Task Name' />
       <Controller
+        _hover={{ cursor: 'pointer' }}
         control={control}
         name='dateDue'
-        dateFormat='P'
         render={({ field: { onChange, onBlur, value, ref } }) => (
-          <ReactDatePicker onChange={onChange} onBlur={onBlur} selected={value} dateFormat='Pp' />
+          <ReactDatePicker
+            onChange={onChange}
+            variant='unstyled'
+            onBlur={onBlur}
+            selected={value}
+            dateFormat='dd MMM yyyy'
+            shouldCloseOnSelect
+            calendarIcon='calendar'
+            placeholderText={'Select a date'}
+            showTimeSelect={false}
+            todayButton='Today'
+            isClearable
+          />
         )}
       />
-      <Flex>
+      <Flex mt={4}>
         <Button onClick={handleClose} w='45%' mr={2}>
           Cancel
         </Button>
