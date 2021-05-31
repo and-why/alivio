@@ -23,8 +23,8 @@ export default function ProjectList({ projects }) {
         return (
           <NextLink
             key={project.projectId}
-            href='/projects/[projectId]'
-            as={`/projects/${project.projectId}`}
+            href='/workspace/[projectId]'
+            as={`/workspace/${project.projectId}`}
             passHref
           >
             <Link ml={2} mb={2}>
