@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import useSWR from 'swr';
-import { DragDropContext } from 'react-beautiful-dnd';
 import { Flex, Heading, Link, Spinner } from '@chakra-ui/react';
 
 import DashboardShell from '@/components/DashboardShell';
@@ -10,6 +9,7 @@ import { getAllProjects, getAllTasks } from '@/lib/admin-db';
 import { useAuth } from '@/lib/auth';
 import fetcher from '@/utils/fetcher';
 import TasksSkeleton from '@/components/TasksSkeleton';
+import NotesEditor from '@/components/NotesEditor';
 
 export default function ProjectPage({ projectId, projectName }) {
   const { user } = useAuth();
@@ -42,29 +42,35 @@ export default function ProjectPage({ projectId, projectName }) {
         <Heading as='h2' size='md' mb={4}>
           {projectName}
         </Heading>
-        {!data ? (
-          <TasksSkeleton />
-        ) : (
-          <Flex direction='column'>
-            {data.tasks.map((task) => {
-              if (projectId == task.projectId) {
-                return <TaskItem key={task.id} task={task} />;
-              }
-            })}
-            {formTaskOpen ? (
-              <FormNewTask projectId={projectId} handleOpenState={handleOpenTaskState} />
-            ) : (
-              <Link
-                fontSize='md'
-                color='gray.500'
-                justifyContent='flex-start'
-                onClick={handleTaskForm}
-              >
-                + Add Task...
-              </Link>
-            )}
-          </Flex>
-        )}
+        <Flex flexWrap='wrap' justify='space-between' w='100%'>
+          {!data ? (
+            <TasksSkeleton />
+          ) : (
+            <Flex direction='column' w='100%' maxWidth='700px' mb={8}>
+              <Heading as='h3' mb={4} size='md'>
+                List
+              </Heading>
+              {data.tasks.map((task) => {
+                if (projectId == task.projectId) {
+                  return <TaskItem key={task.id} task={task} />;
+                }
+              })}
+              {formTaskOpen ? (
+                <FormNewTask projectId={projectId} handleOpenState={handleOpenTaskState} />
+              ) : (
+                <Link
+                  fontSize='md'
+                  color='gray.500'
+                  justifyContent='flex-start'
+                  onClick={handleTaskForm}
+                >
+                  + Add Task...
+                </Link>
+              )}
+            </Flex>
+          )}
+          <NotesEditor />
+        </Flex>
       </Flex>
     </DashboardShell>
   );

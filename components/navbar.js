@@ -2,6 +2,8 @@ import { Avatar } from '@chakra-ui/avatar';
 import { Button } from '@chakra-ui/button';
 import { Flex, Heading, Link, Text } from '@chakra-ui/layout';
 import { useAuth } from '@/lib/auth';
+import { Input } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 const Navbar = () => {
   const auth = useAuth();
@@ -9,9 +11,7 @@ const Navbar = () => {
   return (
     <Flex justifyContent='space-between' width='100%' alignItems='center'>
       <Flex>
-        <Link mr={2}>To Do</Link>
-        <Text>|</Text>
-        <Link ml={2}>Notes</Link>
+        <Input placeholder='Search' />
       </Flex>
       <Heading as='h2' size='md' fontWeight='normal'>
         alivio
@@ -20,7 +20,11 @@ const Navbar = () => {
         <Link onClick={(e) => auth.signout()} mr={4}>
           Sign Out
         </Link>
-        <Avatar src={auth.user.photoUrl} w={10} h={10} />
+        <NextLink href='/account' as={`/account`} passHref>
+          <Link mr={4}>
+            <Avatar size='sm' src={auth.user?.photoUrl} />
+          </Link>
+        </NextLink>
       </Flex>
     </Flex>
   );
