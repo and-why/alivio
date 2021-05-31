@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.3.0",
     "@fontsource/inter": "^4.3.0",
     "@material-ui/pickers": "^3.3.10",
+    "@stripe/stripe-js": "^1.15.0",
     "date-fns": "^2.21.3",
     "firebase": "^8.6.1",
     "firebase-admin": "^9.8.0",
