@@ -38,7 +38,7 @@ export default function ProjectPage({ projectId, projectName }) {
   }
   return (
     <DashboardShell>
-      <Flex direction='column' w='100%'>
+      <Flex direction='column' w='100%' maxWidth='600px' px={4}>
         <Heading as='h2' size='md' mb={4}>
           {projectName}
         </Heading>

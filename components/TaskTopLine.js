@@ -25,6 +25,7 @@ export default function TaskTopLine({ task, handleOpenTaskDetails, taskIsOpen })
       alignItems='center'
       opacity={isComplete && '40%'}
       onClick={handleOpenTaskDetails}
+      bg={taskIsOpen && 'gray.200'}
     >
       <Flex justifyContent='flex-start' alignItems='center' mb={2}>
         {isComplete ? (
