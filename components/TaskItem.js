@@ -15,9 +15,16 @@ export default function TaskItem({ task }) {
     setTaskIsOpen(!taskIsOpen);
   };
   return (
-    <>
+    <Flex
+      direction='column'
+      boxShadow={taskIsOpen && 'md'}
+      borderRadius='10px'
+      my={1}
+      p={taskIsOpen ? 4 : 0}
+      bg={taskIsOpen && 'gray.100'}
+    >
       <TaskTopLine task={task} handleOpenTaskDetails={handleOpenTaskDetails} open={taskIsOpen} />
       {taskIsOpen && <TaskInsideDetails task={task} />}
-    </>
+    </Flex>
   );
 }
