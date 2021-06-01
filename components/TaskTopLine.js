@@ -6,7 +6,7 @@ import { CheckIcon } from '@chakra-ui/icons';
 import { format } from 'date-fns';
 import { color } from '@chakra-ui/react';
 
-export default function TaskTopLine({ task, handleOpenTaskDetails, taskIsOpen }) {
+export default function TaskTopLine({ task, handleOpenTaskDetails, open }) {
   const { dateDue, isCompleted, taskName } = task;
   const today = new Date();
   const due = new Date(dateDue);
@@ -24,10 +24,9 @@ export default function TaskTopLine({ task, handleOpenTaskDetails, taskIsOpen })
       w='100%'
       alignItems='center'
       opacity={isComplete && '40%'}
-      onClick={handleOpenTaskDetails}
-      bg={taskIsOpen && 'gray.200'}
+      // bg={open && 'gray.100'}
     >
-      <Flex justifyContent='flex-start' alignItems='center' mb={2}>
+      <Flex justifyContent='flex-start' align='center'>
         {isComplete ? (
           <CheckIcon
             onClick={handleIsCompleted}
@@ -51,30 +50,37 @@ export default function TaskTopLine({ task, handleOpenTaskDetails, taskIsOpen })
             cursor='pointer'
           ></Box>
         )}
-        <Text fontSize='md' mr={10}>
-          {taskName}
-        </Text>
       </Flex>
-      {dateDue && today.toLocaleDateString() < due.toLocaleDateString() && (
-        <Tag colorScheme='whatsapp' mr={2} minHeight='1rem' fontSize='10px'>
-          DUE IN {difference} DAY{difference > 1 && 'S'}
-        </Tag>
-      )}
-      {today.toLocaleDateString() > due.toLocaleDateString() && (
-        <Tag colorScheme='red' mr={2} minHeight='1rem' fontSize='10px'>
-          OVERDUE
-        </Tag>
-      )}
-      {today.toLocaleDateString() == due.toLocaleDateString() && (
-        <Tag colorScheme='orange' mr={2} minHeight='1rem' fontSize='10px'>
-          DUE TODAY
-        </Tag>
-      )}
-      {dateDue && (
-        <Tag colorScheme='whatsapp' mr={2} minHeight='1rem' fontSize='10px'>
-          {format(new Date(dateDue), 'PPP')}
-        </Tag>
-      )}
+
+      <Flex justify='space-between' w='100%' align='center' onClick={handleOpenTaskDetails}>
+        <Text fontSize='md' mr={10}>
+          {open ? 'Complete: ' + taskName : taskName}
+        </Text>
+
+        <Flex justify='flex-end' justifySelf='flex-end' textAlign='right'>
+          {dateDue && today.toLocaleDateString() > due.toLocaleDateString() && (
+            <Tag colorScheme='whatsapp' mr={2} minHeight='1rem' fontSize='10px'>
+              DUE IN {difference} DAY{difference < 1 && 'S'}
+            </Tag>
+          )}
+          {dateDue && today.toLocaleDateString() < due.toLocaleDateString() && (
+            <Tag colorScheme='red' mr={2} minHeight='1rem' fontSize='10px'>
+              OVERDUE
+            </Tag>
+          )}
+          {dateDue && today.toLocaleDateString() == due.toLocaleDateString() && (
+            <Tag colorScheme='orange' mr={2} minHeight='1rem' fontSize='10px'>
+              DUE TODAY
+            </Tag>
+          )}
+          {dateDue && (
+            <Tag colorScheme='whatsapp' mr={2} minHeight='1rem' fontSize='10px'>
+              {format(new Date(dateDue), 'PPP')}
+            </Tag>
+          )}
+          {/* {open && <Tag colorScheme='blue'>CLOSE</Tag>} */}
+        </Flex>
+      </Flex>
     </Flex>
   );
 }

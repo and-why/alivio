@@ -50,7 +50,7 @@ export default function ProjectPage({ projectId, projectName }) {
               <Heading as='h3' mb={4} size='md'>
                 List
               </Heading>
-              {data.tasks.map((task) => {
+              {data?.tasks.map((task) => {
                 if (projectId == task.projectId) {
                   return <TaskItem key={task.id} task={task} />;
                 }
